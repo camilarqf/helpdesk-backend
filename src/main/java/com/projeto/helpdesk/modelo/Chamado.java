@@ -1,4 +1,4 @@
-package modelo;
+package com.projeto.helpdesk.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Locale;
 
 @Entity
 @AllArgsConstructor
@@ -35,4 +34,15 @@ public class Chamado implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,
+                   Cliente cliente) {
+        this.id = id;
+        this.prioridade = prioridade;
+        this.status = status;
+        this.titulo = titulo;
+        this.observacoes = observacoes;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
+    }
 }

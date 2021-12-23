@@ -1,27 +1,27 @@
-package modelo;
+package com.projeto.helpdesk.modelo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Status {
-    ABERTO(0, "ABERTO"),
-    ANDAMENTO(1, "ANDAMENTO"),
-    ENCERRADO(2, "ENCERRADO");
+public enum Perfil {
+    ADMIN(0, "ROLE_ADMIN"),
+    CLIENTE(1, "ROLE_CLIENTE"),
+    TECNICO(2, "ROLE_TECNICO");
 
     private Integer codigo;
     private String descricao;
 
-    public static Status toEnum(Integer codigo){
+    public static Perfil toEnum(Integer codigo){
         if(codigo == null){
             return null;
         }
-        for(Status x: Status.values()){
+        for(Perfil x: Perfil.values()){
             if(codigo.equals(x.getCodigo())){
                 return x;
             }
         }
-        throw new IllegalArgumentException("Status inválido");
+        throw new IllegalArgumentException("Perfil inválido");
     }
 }

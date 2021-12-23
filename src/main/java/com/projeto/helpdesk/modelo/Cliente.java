@@ -1,4 +1,4 @@
-package modelo;
+package com.projeto.helpdesk.modelo;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package modelo;
+package com.projeto.helpdesk.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
