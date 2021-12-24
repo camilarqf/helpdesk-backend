@@ -1,7 +1,7 @@
 package com.projeto.helpdesk.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.projeto.helpdesk.modelo.Perfil;
+import com.projeto.helpdesk.modelo.enums.Perfil;
 import com.projeto.helpdesk.modelo.Pessoa;
 import com.projeto.helpdesk.modelo.Tecnico;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class TecnicoDTO extends Pessoa {
     protected String cpf;
     protected String email;
     protected String senha;
-    protected Set<Perfil> perfis = new HashSet<>();
+    protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
@@ -37,7 +37,11 @@ public class TecnicoDTO extends Pessoa {
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.senha = obj.getSenha();
-        this.perfis = obj.getPerfis();
+        this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
+    }
+
+    public Set<Perfil> getPerfis() {
+        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 }

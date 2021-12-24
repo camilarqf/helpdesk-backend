@@ -23,11 +23,9 @@ public class Cliente extends Pessoa{
 
     public Cliente() {
         super();
-        setPerfis(Collections.singleton(Perfil.CLIENTE));
     }
 
     public Cliente(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
-        setPerfis(Collections.singleton(Perfil.CLIENTE));
     }
 }
