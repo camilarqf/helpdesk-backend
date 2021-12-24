@@ -1,5 +1,6 @@
 package com.projeto.helpdesk.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class Cliente extends Pessoa{
 
     private static final Long serialVersionUID = 1L;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Chamado> chamados = new ArrayList<>();
 
