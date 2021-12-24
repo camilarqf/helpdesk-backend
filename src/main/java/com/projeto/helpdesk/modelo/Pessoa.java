@@ -46,6 +46,7 @@ public abstract class Pessoa implements Serializable {
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        setPerfis(Collections.singleton(Perfil.CLIENTE));
     }
 
     @Override

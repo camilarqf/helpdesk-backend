@@ -1,5 +1,6 @@
 package com.projeto.helpdesk.controller;
 
+import com.projeto.helpdesk.dto.TecnicoDTO;
 import com.projeto.helpdesk.modelo.Tecnico;
 import com.projeto.helpdesk.service.TecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class TecnicoController {
     private TecnicoService tecnicoService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Tecnico> findById(@PathVariable Integer id){
+    public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id){
         Tecnico tecnico = tecnicoService.findById(id);
-        return new ResponseEntity<>(tecnico, HttpStatus.OK);
+        return new ResponseEntity<>(new TecnicoDTO(tecnico), HttpStatus.OK);
     }
 }
