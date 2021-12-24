@@ -1,4 +1,4 @@
-package com.projeto.helpdesk.modelo;
+package com.projeto.helpdesk.modelo.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
