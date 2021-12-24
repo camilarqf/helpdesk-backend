@@ -1,6 +1,9 @@
 package com.projeto.helpdesk.service;
 
 import com.projeto.helpdesk.modelo.*;
+import com.projeto.helpdesk.modelo.enums.Perfil;
+import com.projeto.helpdesk.modelo.enums.Prioridade;
+import com.projeto.helpdesk.modelo.enums.Status;
 import com.projeto.helpdesk.repository.ChamadoRepository;
 import com.projeto.helpdesk.repository.ClienteRepository;
 import com.projeto.helpdesk.repository.TecnicoRepository;
@@ -8,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 @Service
 public class DBService {
@@ -21,7 +23,7 @@ public class DBService {
 
     public void instanciaDB(){
         Tecnico admin = new Tecnico(null, "admin", "93612909088", "admin@email.com", "1234");
-        admin.setPerfis(Collections.singleton(Perfil.ADMIN));
+        admin.addPerfil(Perfil.ADMIN);
         Tecnico tec2 = new Tecnico(null, "Richard Stallman", "903.347.070-56", "stallman@mail.com", ("1234"));
         Tecnico tec3 = new Tecnico(null, "Claude Elwood Shannon", "271.068.470-54", "shannon@mail.com", ("1234"));
         Tecnico tec4 = new Tecnico(null, "Tim Berners-Lee", "162.720.120-39", "lee@mail.com", ("1234"));

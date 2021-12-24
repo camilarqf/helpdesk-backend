@@ -1,6 +1,8 @@
 package com.projeto.helpdesk.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.helpdesk.modelo.enums.Prioridade;
+import com.projeto.helpdesk.modelo.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 

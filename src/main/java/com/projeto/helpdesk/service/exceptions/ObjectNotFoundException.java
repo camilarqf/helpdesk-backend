@@ -1,4 +1,4 @@
-package com.projeto.helpdesk.resource.exceptions;
+package com.projeto.helpdesk.service.exceptions;
 
 import lombok.NoArgsConstructor;
 
@@ -8,5 +8,9 @@ public class ObjectNotFoundException extends RuntimeException {
 
     public ObjectNotFoundException(String message) {
         super(message);
+    }
+
+    public ObjectNotFoundException(String message, Throwable cause) {
+        super(message, cause);
     }
 }
