@@ -33,7 +33,7 @@ public class Tecnico extends Pessoa{
         addPerfil(Perfil.TECNICO);
     }
 
-    public Tecnico(TecnicoDTO obj) {
+    public Tecnico(TecnicoDTO obj) { //converte tecnicoDTO em tecnico
         super();
         this.id = obj.getId();
         this.nome = obj.getNome();
@@ -42,6 +42,5 @@ public class Tecnico extends Pessoa{
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
-        addPerfil(Perfil.TECNICO);
     }
 }
