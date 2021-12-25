@@ -1,6 +1,9 @@
 package com.projeto.helpdesk.service;
 
 import com.projeto.helpdesk.dto.TecnicoDTO;
+import com.projeto.helpdesk.modelo.Pessoa;
+import com.projeto.helpdesk.repository.PessoaRepository;
+import com.projeto.helpdesk.service.exceptions.DataIntegrityViolationException;
 import com.projeto.helpdesk.service.exceptions.ObjectNotFoundException;
 import com.projeto.helpdesk.modelo.Tecnico;
 import com.projeto.helpdesk.repository.TecnicoRepository;
@@ -15,6 +18,8 @@ public class TecnicoService {
 
     @Autowired
     private TecnicoRepository tecnicoRepository;
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     public Tecnico findById(Integer id){
        Optional<Tecnico> tecnico = tecnicoRepository.findById(id);
@@ -26,8 +31,22 @@ public class TecnicoService {
     }
 
     public Tecnico create(TecnicoDTO tecnicoDTO){
+        validaPorCpfeEmail(tecnicoDTO);
         Tecnico tecnico = new Tecnico(tecnicoDTO);
         return  tecnicoRepository.save(tecnico);
+    }
+
+    private void validaPorCpfeEmail(TecnicoDTO tecnicoDTO) {
+        Optional<Pessoa> pessoaCpf = pessoaRepository.findByCpf(tecnicoDTO.getCpf());
+        Optional<Pessoa> pessoaEmail = pessoaRepository.findByEmail(tecnicoDTO.getEmail());
+
+        if (pessoaCpf.isPresent() && pessoaCpf.get().getId() != tecnicoDTO.getId()){
+            throw new DataIntegrityViolationException("CPF já cadastrado no sistema");
+        }
+
+        if(pessoaEmail.isPresent() && pessoaEmail.get().getId() != tecnicoDTO.getId()){
+            throw new DataIntegrityViolationException("E-mail já cadastrado no sistema");
+        }
     }
 
 }

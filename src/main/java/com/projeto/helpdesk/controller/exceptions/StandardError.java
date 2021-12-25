@@ -1,4 +1,4 @@
-package com.projeto.helpdesk.resource.exceptions;
+package com.projeto.helpdesk.controller.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
