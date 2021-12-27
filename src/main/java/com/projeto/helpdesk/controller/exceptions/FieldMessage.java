@@ -7,15 +7,12 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class StandardError implements Serializable {
-    private static final long serialVersionUID = 772659055280620594L;
-    private Long timestamp;
-    private Integer status;
-    private String error;
+public class FieldMessage implements Serializable {
+    private static final long serialVersionUID = -1694855607197794170L;
+    private String fieldName;
     private String message;
-    private String path;
 }
