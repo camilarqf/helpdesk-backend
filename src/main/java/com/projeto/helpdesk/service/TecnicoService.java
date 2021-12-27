@@ -49,4 +49,13 @@ public class TecnicoService {
         }
     }
 
+    public Tecnico update(Integer id, TecnicoDTO tecnicoDTO){
+        tecnicoDTO.setId(id);
+        Optional<Tecnico> oldTecnico = tecnicoRepository.findById(id);
+        oldTecnico.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID:" + id));
+
+        Tecnico tecnico = new Tecnico(tecnicoDTO);
+        return tecnicoRepository.save(tecnico);
+    }
+
 }
