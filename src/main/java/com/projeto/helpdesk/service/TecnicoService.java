@@ -51,11 +51,20 @@ public class TecnicoService {
 
     public Tecnico update(Integer id, TecnicoDTO tecnicoDTO){
         tecnicoDTO.setId(id);
-        Optional<Tecnico> oldTecnico = tecnicoRepository.findById(id);
-        oldTecnico.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID:" + id));
+        Tecnico oldTecnico = findById(id);
 
+        validaPorCpfeEmail(tecnicoDTO);
         Tecnico tecnico = new Tecnico(tecnicoDTO);
         return tecnicoRepository.save(tecnico);
     }
+
+    public void delete(Integer id){
+        Tecnico tecnico = findById(id);
+        if(tecnico.getChamados().size() > 0){
+            throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
+        }
+        tecnicoRepository.deleteById(id);
+    }
+
 
 }
