@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice //usado para tratamento global de erros no aplicativo Spring MVC. Ele também tem controle
 // total sobre o corpo da resposta e o código de status.
@@ -39,6 +41,17 @@ public class ResourceExceptionHandler {
 
         for(FieldError x : ex.getBindingResult().getFieldErrors()){
             errors.addErrors(x.getField(), x.getDefaultMessage());
+        }
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<StandardError> constraintViolationException(ConstraintViolationException ex, HttpServletRequest request){
+        ValidationError errors = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+                "Validation Error","Erro na validação dos campos", request.getRequestURI());
+
+        for(ConstraintViolation<?> x : ex.getConstraintViolations()){
+            errors.addErrors(String.valueOf(x.getPropertyPath()), x.getMessageTemplate());
         }
         return ResponseEntity.badRequest().body(errors);
     }

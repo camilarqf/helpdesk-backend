@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -25,9 +26,10 @@ public abstract class Pessoa implements Serializable {
     protected Integer id;
     protected String nome;
 
-    @CPF
+    @CPF(message = "Forneça um CPF válido")
     @Column(unique = true)
     protected String cpf;
+    @Email(message = "Forneça um e-mail válido")
     @Column(unique = true)
     protected String email;
 
