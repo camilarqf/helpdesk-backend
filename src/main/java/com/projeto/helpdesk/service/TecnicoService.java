@@ -10,6 +10,7 @@ import com.projeto.helpdesk.repository.TecnicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class TecnicoService {
         return tecnicoRepository.findAll();
     }
 
-    public Tecnico create(TecnicoDTO tecnicoDTO){
+    public Tecnico create(@Valid TecnicoDTO tecnicoDTO){
         validaPorCpfeEmail(tecnicoDTO);
         Tecnico tecnico = new Tecnico(tecnicoDTO);
         return  tecnicoRepository.save(tecnico);
@@ -49,7 +50,7 @@ public class TecnicoService {
         }
     }
 
-    public Tecnico update(Integer id, TecnicoDTO tecnicoDTO){
+    public Tecnico update(@Valid Integer id, TecnicoDTO tecnicoDTO){
         tecnicoDTO.setId(id);
         Tecnico oldTecnico = findById(id);
 

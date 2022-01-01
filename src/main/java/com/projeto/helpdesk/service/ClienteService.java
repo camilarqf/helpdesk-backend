@@ -10,6 +10,7 @@ import com.projeto.helpdesk.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class ClienteService {
         return clientes;
     }
 
-    public Cliente create(ClienteDTO clienteDTO){
+    public Cliente create(@Valid ClienteDTO clienteDTO){
         validaPorCpfeEmail(clienteDTO);
         Cliente cliente = new Cliente(clienteDTO);
         return clienteRepository.save(cliente);
@@ -50,7 +51,7 @@ public class ClienteService {
         }
     }
 
-    public Cliente update(Integer id, ClienteDTO clienteDTO){
+    public Cliente update(@Valid Integer id, ClienteDTO clienteDTO){
         clienteDTO.setId(id);
         Cliente oldCliente = findById(id);
 
