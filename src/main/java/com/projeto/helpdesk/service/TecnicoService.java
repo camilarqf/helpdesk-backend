@@ -8,6 +8,7 @@ import com.projeto.helpdesk.service.exceptions.ObjectNotFoundException;
 import com.projeto.helpdesk.modelo.Tecnico;
 import com.projeto.helpdesk.repository.TecnicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -21,6 +22,8 @@ public class TecnicoService {
     private TecnicoRepository tecnicoRepository;
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public Tecnico findById(Integer id){
        Optional<Tecnico> tecnico = tecnicoRepository.findById(id);
@@ -33,6 +36,7 @@ public class TecnicoService {
 
     public Tecnico create(@Valid TecnicoDTO tecnicoDTO){
         validaPorCpfeEmail(tecnicoDTO);
+        tecnicoDTO.setSenha(encoder.encode(tecnicoDTO.getSenha()));
         Tecnico tecnico = new Tecnico(tecnicoDTO);
         return  tecnicoRepository.save(tecnico);
     }
