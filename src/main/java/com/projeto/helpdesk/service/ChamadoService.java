@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,11 @@ public class ChamadoService {
         Chamado chamado = new Chamado();
 
         if(chamadoDTO.getId() != null){ //ou seja, se for diferente de nulo quer atualizar e não criar um novo
-            chamadoDTO.setId(chamadoDTO.getId());
+            chamado.setId(chamadoDTO.getId());
+        }
+
+        if(chamadoDTO.getStatus().equals(2)){
+            chamado.setDataFechamento(LocalDate.now());
         }
 
         chamado.setCliente(cliente);
@@ -60,4 +65,10 @@ public class ChamadoService {
         return chamado;
     }
 
+    public Chamado update(@Valid Integer id, ChamadoDTO chamadoDTO) {
+        chamadoDTO.setId(id);
+        Chamado oldChamado = findById(id);
+        oldChamado = newChamado(chamadoDTO);
+        return chamadoRepository.save(oldChamado);
+    }
 }
