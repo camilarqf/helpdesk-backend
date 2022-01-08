@@ -60,6 +60,11 @@ public class ClienteService {
         Cliente oldCliente = findById(id);
 
         validaPorCpfeEmail(clienteDTO);
+
+        if(!oldCliente.getSenha().equals(clienteDTO.getSenha())){
+            clienteDTO.setSenha(encoder.encode(clienteDTO.getSenha()));
+        }
+
         Cliente cliente = new Cliente(clienteDTO);
         return clienteRepository.save(cliente);
     }

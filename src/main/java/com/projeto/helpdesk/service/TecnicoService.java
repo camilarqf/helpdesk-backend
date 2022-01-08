@@ -59,6 +59,10 @@ public class TecnicoService {
         Tecnico oldTecnico = findById(id);
 
         validaPorCpfeEmail(tecnicoDTO);
+
+        if(!oldTecnico.getSenha().equals(tecnicoDTO.getSenha())){
+            tecnicoDTO.setSenha(encoder.encode(tecnicoDTO.getSenha()));
+        }
         Tecnico tecnico = new Tecnico(tecnicoDTO);
         return tecnicoRepository.save(tecnico);
     }
